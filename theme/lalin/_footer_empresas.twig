@@ -1,0 +1,67 @@
+<footer>
+        <div class="container">
+            <p class="pull-right">
+                <a href="http://lalin.gal">Concello de Lalín &copy; {{ "now"|date("Y") }}</a> | 
+                <a href="https://bolt.cm">Bolt <i class="fa fa-heart"></i></a>
+            </p>
+        </div>
+    </footer>   
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ paths.theme }}js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    
+    <script src="{{ paths.theme }}js/vendor/bootstrap.min.js"></script>
+    <script src="{{ paths.theme }}js/main.js"></script>   
+        
+    {% setcontent empresas = "empresa" %}
+        
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+        
+    <script>
+        var map = L.map('mapa', {fullscreenControl: true}).setView([42.67504260505, -8.149980802377286], 15);
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        
+        var myStyle = {
+            "color": "#336699",
+            "weight": 5,
+            "opacity": 0.65
+        };
+        
+        var myStyleForRent = {
+            "color": "#006633",
+            "weight": 5,
+            "opacity": 0.70
+        };        
+        
+        {% for empresa in empresas %}
+        
+            {% if empresa.geolocation is defined %}            
+                {% if empresa.geojson is defined %}
+                    {% if empresa.for_rent %}
+                    L.geoJson({{ empresa.geojson }}, myStyleForRent).addTo(map)
+                     .bindPopup('{{ empresa.title }}<br/><a href="{{ empresa.link }}">&raquo; Máis información</a>');
+                    {% else %}
+                    L.geoJson({{ empresa.geojson }}, myStyle).addTo(map)
+                     .bindPopup('{{ empresa.title }}<br/><a href="{{ empresa.link }}">&raquo; Máis información</a>');
+                    {% endif %}        
+                {% else %}
+                L.marker([{{ empresa.geolocation.latitude }}, {{ empresa.geolocation.longitude }}]).addTo(map)
+                    .bindPopup('{{ empresa.title }}<br/><a href="{{ empresa.link }}">&raquo; Máis información</a>');
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </script>   
+        
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"Este sitio emprega cookies para facer uso dos servizos de mapas","dismiss":"De acordo","learnMore":"Ler máis","link":"http://lalin.gal/aviso-legal","theme":"light-floating"};
+        </script>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        <!-- End Cookie Consent plugin -->    
+    </body>
+</html>

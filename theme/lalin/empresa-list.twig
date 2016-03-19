@@ -1,0 +1,71 @@
+{% include '_header.twig' %}
+
+
+
+<div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h1><i class="fa fa-map"></i> Directorio de Empresas do Concello de Lalín</h1>
+            
+            <div id="mapa"></div>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+      <div class="row">
+
+        <div class="col-md-8">
+
+            {% setcontent empresas = 'empresas' limit 5 where { for_rent: 0 } orderby 'title' allowpaging %}
+
+            {# Tag orixinal #}
+            {# % for record in records % #}
+            
+            {% for record in empresas %}  
+            <div>
+                <h2><a href="{{ record.link }}">{{ record.title }}</a></h2>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        {% if record.image!="" %}                  
+                        <img src="{{ image(record.image) }}" class="img-responsive" alt="{{ record.title }}" />                  
+                        {% else %}
+                        <img src="{{ image('2016-03/no-logo.png') }}" class="img-responsive" alt="{{ record.title }}" /> 
+                        <span class="no-logo">{{ record.title }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        {{ excerpt(record.descricion, 200) }}
+                    </div>
+                </div>
+            </div>          
+            <hr/>
+            {% endfor %}
+
+            <br/>
+        
+            <div class="pagination-center">
+                {{ pager('empresas') }}
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+          <div class="well">
+
+            
+              {% include '_aside.twig' %}
+
+          </div><!--/.well -->
+        </div><!--/col-md-4-->
+
+    </div>
+
+ </div>
+
+    <hr/>
+
+    {% include '_footer_empresas.twig' %}

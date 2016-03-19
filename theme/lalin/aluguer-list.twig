@@ -1,0 +1,41 @@
+{% include '_header.twig' %}
+
+
+
+<div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h1><i class="fa fa-map"></i> Locais/Naves en Aluguer</h1>
+            
+            <div id="mapa"></div>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+      <div class="row">
+
+        <div class="col-md-8">
+             <p class="lead">
+                 Os locais que se mostran no mapa están dispoñibles para ser alugados. 
+                 Pode solicitar máis información no <a href="http://www.lalin.gal/es/contacto">seguinte formulario</a>.           
+            </p>            
+        </div>
+
+        <div class="col-md-4">
+          <div class="well">
+            
+              {% include '_aside.twig' %}
+
+          </div><!--/.well -->
+        </div><!--/col-md-4-->
+
+    </div>
+
+ </div>
+
+    <hr/>
+
+    {% include '_footer_aluguer.twig' %}

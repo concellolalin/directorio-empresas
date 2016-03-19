@@ -1,0 +1,31 @@
+{% include '_header.twig' %}
+
+
+    <div class="container">
+
+      <div class="row">
+          {% setcontent records = "articles/latest/3" allowpaging %}
+          {% for record in records %}
+        <div class="col-md-4">
+
+            {% if record.image!="" %}
+          <a href="{{ image(record.image) }}"><img class="img-responsive fancybox" src="{{ thumbnail(record.image, 150, 150) }}"></a>
+          {% endif %}
+
+          <h2><a href="{{ record.link }}">{{ record.title }}</a></h2>
+
+          <p>{{ record.excerpt(220) }}</p>
+
+          <p><a class="btn" href="{{ record.link }}">Read More &raquo;</a></p>
+        </div><!-- /.col-md-4 -->
+        {% endfor %}
+        
+      </div><!-- /.row -->
+
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+  <hr>
+
+{% include '_footer.twig' %}

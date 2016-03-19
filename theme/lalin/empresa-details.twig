@@ -1,0 +1,146 @@
+{% include '_header.twig' %}
+
+<div class="container">
+      <div class="row">
+
+        <div class="col-md-8 col-xs-12">
+
+            <h1>{{ record.title }}</h1>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    {% if record.image is not empty %}
+                    <img src="{{ image(record.image) }}" class="img-responsive" alt="" />
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    {{ record.descricion }}
+                    <br/>
+                    
+                    <div class="pull-right">
+                        <ul class="list-inline">
+                            {% if record.facebook is not empty %}
+                            <li>
+                                <a href="{{ record.facebook }}">
+                                    <i class="fa fa-facebook-square fa-3x"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if record.twitter is not empty %}
+                            <li>
+                                <a href="{{ record.twitter }}">
+                                    <i class="fa fa-twitter-square fa-3x"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if record.youtube is not empty %}
+                            <li>
+                                <a href="{{ record.youtube }}">
+                                    <i class="fa fa-youtube-square fa-3x"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if record.linkedin is not empty %}
+                            <li>
+                                <a href="{{ record.linkedin }}">
+                                    <i class="fa fa-linkedin-square fa-3x"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>                                
+                    </div>
+                </div>
+            </div>
+            
+            <br/>            
+            
+            {% if record.address != '' %}
+            <div>
+                <i class="fa fa-location-arrow"></i> 
+                <strong>Enderezo:</strong>
+                <br/>
+                {{ record.address }}
+            </div>
+            {% endif %}
+            
+            <br/>
+            
+            {% if record.website != '' %}
+            <div>
+                <i class="fa fa-globe"></i>
+                <strong>Sitio web:</strong>
+                <br/>
+                <a href="{{ record.website }}">{{ record.website }}</a>
+            </div>
+            {% endif %}
+            
+            <br/>           
+
+            {% if record.email != '' %}
+            <div>
+                <i class="fa fa-envelope"></i> 
+                <strong>Email:</strong>
+                <br/>
+                <a href="mailto:{{ record.email|obfuscateEmail }}">{{ record.email|obfuscateEmail }}</a>
+            </div>
+            {% endif %}
+            
+            <br/>
+            
+            {% if record.phone != '' %}
+            <div>
+                <i class="fa fa-phone-square"></i> 
+                <strong>Teléfono:</strong>
+                <br/>
+                <a href="tel:{{ record.phone|replace({' ':''}) }}">{{ record.phone }}</a>
+            </div>
+            {% endif %}
+            
+            <br/>
+            
+            {% if record.fax != '' %}
+            <div>
+                <i class="fa fa-fax"></i> 
+                <strong>Fax:</strong>
+                <br/>
+                {{ record.fax }}
+            </div>
+            {% endif %}            
+            
+            <br/>
+            
+            <div id="mapa"></div>
+            
+            <br/>
+            
+            <div class="pull-right">
+                {% if record.geolocation is not empty %}
+                <a href="https://www.google.es/maps/?ll={{ record.geolocation.latitude }},{{ record.geolocation.longitude }}&z=15&z=15&t=m&hl=gl&daddr={{ record.geolocation.latitude }},{{ record.geolocation.longitude }}" target="_new" class="btn btn-default pull-right">
+                    <i class="fa fa-map-marker"></i> <strong>Como chegar?</strong>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xs-12">
+            
+            {% if empresa.video is not empty %}
+            <div class="clearfix"></div>
+            <div class="video-responsive">
+                {{ empresa.video.responsive }}
+            </div>
+            {% endif %}
+
+            <br/>
+            
+            <div class="well">            
+                {% include '_aside.twig' %}
+            </div><!--/.well -->
+        </div>
+
+    </div>
+</div>
+
+<hr />
+
+{% include '_footer.twig' with {'empresa': record} %}

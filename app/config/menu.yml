@@ -1,0 +1,11 @@
+main:
+  - class: first
+    path: homepage
+    title: 'Directorio de Empresas do Concello de Lalín'
+    label: Empresas
+  - path: /en-aluguer/
+    title: 'Naves/Locais en aluguer'
+    label: 'En aluguer'
+  - path: /page/informacion
+    title: 'Información sobre o directorio'
+    label: Contacto

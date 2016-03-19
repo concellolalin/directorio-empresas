@@ -1,0 +1,55 @@
+{% include '_header.twig' %}
+
+<div class="container">
+      <div class="row">
+
+        <div class="col-md-8">
+
+            {% for record in records %}
+            <div>
+              <h2><a href="{{ record.link }}">{{ record.title }}</a></h2>
+              
+              {% if record.image!="" %}
+              <div class="pull-right">
+                  <img src="{{ image(record.image) }}" class="img-responsive" />
+              </div>
+              {% endif %}
+
+              <div>
+                  {% if record.descricion %}
+                      {{ record.descricion }}        
+                  {% endif %}
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            
+            <br/>
+            <hr/>
+
+
+            {% else %}
+            <article>
+                <h2>Non se atopou ningún contido relacionado.</h2>
+            </article>
+            {% endfor %}
+
+            <br/>
+            
+            {{ pager() }}
+          </div>
+
+          <div class="col-md-4">
+              <div class="well">
+
+                  {% include '_aside.twig' %}
+
+              </div><!--/.well -->
+          </div><!--/col-md-4-->
+
+    </div>
+
+</div>
+
+
+{% include '_footer.twig' %}

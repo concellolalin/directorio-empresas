@@ -1,0 +1,22 @@
+<!-- Sidebar -->
+
+<aside>   
+
+    {% setcontent records = "empresa/latest/15" where { for_rent: 0 } %}
+
+    <h5>Últimas empresas rexistradas</h5>
+    <ul class="list-unstyled">
+        {% for record in records %}
+        <li>            
+            <a href="{{ record.link }}">
+                <i class="fa fa-chevron-circle-right"></i>
+                {{ record.title }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+</aside>
+
+<!-- End Sidebar -->
